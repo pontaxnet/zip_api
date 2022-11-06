@@ -1,0 +1,32 @@
+<%= link_to "top", root_path %>
+
+<h2>郵便番号から住所検索（Turbo Frame）</h2>
+
+<div>
+<%= form_with url: zips_search_tb_path, data: { turbo_frame: "cats-list" } do |form| %>
+  <%= form.label :zip_code, "zip_code: " %>
+  <%= form.text_field :zip_code %>
+  <%= form.submit "Search" %>
+<% end %>
+</div>
+
+<div style="margin-top:20px;">
+<%= turbo_frame_tag "cats-list" do %>
+<table>
+  <tr>
+    <th>郵便番号</th>
+    <th>都道府県</th>
+    <th>市区町村</th>
+    <th>町</th>
+  </tr>
+  <% @zips.each do |zip| %>
+    <tr>
+      <td><%= zip.zip_code %></td>
+      <td><%= zip.prefecture_kanji %></td>
+      <td><%= zip.city_kanji %></td>
+      <td><%= zip.town_kanji %></td>
+    </tr>
+  <% end %>
+</table>
+<% end %>
+</div>

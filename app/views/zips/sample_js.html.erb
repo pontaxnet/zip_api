@@ -1,0 +1,82 @@
+<%= link_to "top", root_path %>
+
+<h2>郵便番号から住所検索（JavaScriptでAPIから取得）</h2>
+
+<div style="margin-bottom:20px;">
+  <input type="text" id="search">
+  <input type="button" id="button" value="検索">
+</div>
+
+<table id="zip_table">
+  <tr>
+    <th>郵便番号</th>
+    <th>都道府県</th>
+    <th>市区町村</th>
+    <th>町</th>
+  </tr>
+</table>
+
+<script>
+  const search = document.getElementById("search");
+  const button = document.getElementById("button");
+  const zipTable = document.getElementById("zip_table");
+
+  async function callApi() {
+    const res = await fetch("<%= API_URL %>api_search?zip_code=" + search.value);
+    const zips = await res.json();
+    //console.log(zips);
+    let parent = document.getElementById('zip_table');
+    while(parent.lastChild) {
+      parent.removeChild(parent.lastChild);
+    }
+
+    var tr = document.createElement("tr");
+    zipTable.appendChild(tr);
+
+    var th = document.createElement("th");
+    th.textContent = "郵便番号"
+    tr.appendChild(th);
+    var th = document.createElement("th");
+    th.textContent = "都道府県"
+    tr.appendChild(th);
+    var th = document.createElement("th");
+    th.textContent = "市区町村"
+    tr.appendChild(th);
+    var th = document.createElement("th");
+    th.textContent = "町"
+    tr.appendChild(th);
+
+    var tr = document.createElement("tr");
+    zipTable.appendChild(tr);
+    for (zip of zips['results']) {
+      //console.log(zip);
+      var tr = document.createElement("tr");
+
+      var td = document.createElement("td");
+      td.textContent = zip['zip_code'];
+      tr.appendChild(td);
+
+      var td = document.createElement("td");
+      td.textContent = zip['prefecture'];
+      tr.appendChild(td);
+
+      var td = document.createElement("td");
+      td.textContent = zip['city'];
+      tr.appendChild(td);
+
+      var td = document.createElement("td");
+      td.textContent = zip['town'];
+      tr.appendChild(td);
+
+      zipTable.appendChild(tr);
+    }
+    //body.appendChild(table);
+    //body.appendChild(zipTable);
+  };
+
+  button.addEventListener("click", function() {
+    callApi();
+  });
+
+
+</script>
