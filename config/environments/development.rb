@@ -69,4 +69,5 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 end
 
-API_URL = "http://localhost:3000/"
+#API_URL = "http://localhost:3000/"
+API_URL = "https://pontax.net/zip_api/"
