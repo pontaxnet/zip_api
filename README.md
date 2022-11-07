@@ -1,25 +1,9 @@
-# README
+# zip_api
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+郵便番号から住所を検索するAPI及びそのデモ画面
 
-Things you may want to cover:
+## 使い方や説明など
 
-* Ruby version
-3.1.2
+以下を参照
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+https://pontax.net/wp/zip_api/
